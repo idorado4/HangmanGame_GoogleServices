@@ -5,12 +5,10 @@ using UniRx;
 public class HomeMenuController : ControllerBase
 {
     private HomeMenuViewModel _homeMenuViewModel;
-    private PopUpLoginViewModel _popUpLoginViewModel;
 
-    public void SetViewModel(HomeMenuViewModel homeMenuViewModel,PopUpLoginViewModel popUpLoginViewModel)
+    public void SetViewModel(HomeMenuViewModel homeMenuViewModel)
     {
         _homeMenuViewModel = homeMenuViewModel;
-        _popUpLoginViewModel = popUpLoginViewModel;
 
         _homeMenuViewModel.OnProfileButtonPressed.Subscribe((_) =>
         {

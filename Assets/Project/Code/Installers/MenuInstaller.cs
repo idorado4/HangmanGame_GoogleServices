@@ -26,16 +26,16 @@ public class MenuInstaller : MonoBehaviour
         var popUpLoginViewModel = new PopUpLoginViewModel();
 
         _navigationBarView.SetViewModel(navigationBarViewModel);
-        _homeMenuView.SetViewModel(homeMenuViewModel, popUpLoginViewModel);
+        _homeMenuView.SetViewModel(homeMenuViewModel, popUpLoginViewModel, navigationBarViewModel);
         _settingsMenuView.SetViewModel(settingsMenuViewModel);
         _rankingMenuView.SetViewModel(rankingMenuViewModel);
-        _popUpLoginView.SetViewModel(popUpLoginViewModel);
+        _popUpLoginView.SetViewModel(popUpLoginViewModel, navigationBarViewModel);
 
         var homeMenuController = new HomeMenuController();
         var popUpLoginController = new PopUpLoginController();
         
-        popUpLoginController.SetViewModel(popUpLoginViewModel);
-        homeMenuController.SetViewModel(homeMenuViewModel, popUpLoginViewModel);
+        popUpLoginController.SetViewModel(popUpLoginViewModel, homeMenuViewModel);
+        homeMenuController.SetViewModel(homeMenuViewModel);
         
 
         new NavigationBarController(navigationBarViewModel, homeMenuViewModel, settingsMenuViewModel, rankingMenuViewModel);

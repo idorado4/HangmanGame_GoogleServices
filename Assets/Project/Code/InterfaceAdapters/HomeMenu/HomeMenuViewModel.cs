@@ -8,7 +8,7 @@ public class HomeMenuViewModel : ViewModelBase
     public readonly ReactiveProperty<bool> Show;
     public readonly ReactiveProperty<bool> HomeButtonEnabled;
     public readonly ReactiveProperty<bool> ProfileButtonEnabled;
-    public ReactiveCommand OnProfileButtonPressed;
+    public readonly ReactiveCommand OnProfileButtonPressed;
     public HomeMenuViewModel()
     {
         Show = new ReactiveProperty<bool>(true).AddTo(_disposables);

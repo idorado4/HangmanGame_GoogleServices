@@ -28,8 +28,8 @@ public class NavigationBarController : ControllerBase
             _settingsMenuViewModel.Show.Value = false;  
             
             _homeMenuViewModel.HomeButtonEnabled.Value = false;
-            _rankingMenuViewModel.ButtonEnabled.Value = true;
-            _settingsMenuViewModel.ButtonEnabled.Value = true;
+            _rankingMenuViewModel.RankingButtonEnabled.Value = true;
+            _settingsMenuViewModel.SettingsButtonEnabled.Value = true;
         });
         
         _navigationBarViewModel.OnRankingButtonPressed.Subscribe((_) =>
@@ -39,8 +39,8 @@ public class NavigationBarController : ControllerBase
             _settingsMenuViewModel.Show.Value = false;
             
             _homeMenuViewModel.HomeButtonEnabled.Value = true;
-            _rankingMenuViewModel.ButtonEnabled.Value = false;
-            _settingsMenuViewModel.ButtonEnabled.Value = true;
+            _rankingMenuViewModel.RankingButtonEnabled.Value = false;
+            _settingsMenuViewModel.SettingsButtonEnabled.Value = true;
         });
         
         _navigationBarViewModel.OnSettingsButtonPressed.Subscribe((_) =>
@@ -50,12 +50,24 @@ public class NavigationBarController : ControllerBase
             _settingsMenuViewModel.Show.Value = true;
             
             _homeMenuViewModel.HomeButtonEnabled.Value = true;
-            _rankingMenuViewModel.ButtonEnabled.Value = true;
-            _settingsMenuViewModel.ButtonEnabled.Value = false;
+            _rankingMenuViewModel.RankingButtonEnabled.Value = true;
+            _settingsMenuViewModel.SettingsButtonEnabled.Value = false;
+        });
+
+        _navigationBarViewModel.DisableButtons.Subscribe((value) =>
+        {
+            _rankingMenuViewModel.RankingButtonEnabled.Value = false;
+            _settingsMenuViewModel.SettingsButtonEnabled.Value = false;
         });
         
-        
-       
+        _navigationBarViewModel.EnableButtons.Subscribe((value) =>
+        {
+            _rankingMenuViewModel.RankingButtonEnabled.Value = true;
+            _settingsMenuViewModel.SettingsButtonEnabled.Value = true;
+        });
+
+
+
 
 
 

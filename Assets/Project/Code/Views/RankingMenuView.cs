@@ -31,7 +31,7 @@ public class RankingMenuView : ViewBase
                     transitionTime);
         }).AddTo(_disposables);
 
-        _rankingMenuViewModel.ButtonEnabled.Subscribe((buttonEnabled) =>
+        _rankingMenuViewModel.RankingButtonEnabled.Subscribe((buttonEnabled) =>
         {
             rankingButton.interactable = buttonEnabled;
 

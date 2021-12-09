@@ -6,11 +6,11 @@ using UnityEngine;
 public class RankingMenuViewModel : ViewModelBase
 {
     public readonly ReactiveProperty<bool> Show;
-    public readonly ReactiveProperty<bool> ButtonEnabled;
+    public readonly ReactiveProperty<bool> RankingButtonEnabled;
     
     public RankingMenuViewModel()
     {
         Show = new ReactiveProperty<bool>(false).AddTo(_disposables);
-        ButtonEnabled = new ReactiveProperty<bool>(true).AddTo(_disposables);
+        RankingButtonEnabled = new ReactiveProperty<bool>(true).AddTo(_disposables);
     }
 }

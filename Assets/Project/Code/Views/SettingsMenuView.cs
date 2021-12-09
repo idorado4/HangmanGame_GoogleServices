@@ -32,7 +32,7 @@ public class SettingsMenuView : ViewBase
                transitionTime);
       }).AddTo(_disposables);
       
-      _settingsMenuViewModel.ButtonEnabled.Subscribe((buttonEnabled) =>
+      _settingsMenuViewModel.SettingsButtonEnabled.Subscribe((buttonEnabled) =>
       {
          settingsButton.interactable = buttonEnabled;
 
