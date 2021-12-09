@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class HomeMenuController : MonoBehaviour
+using UniRx;
+public class HomeMenuController : ControllerBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private HomeMenuViewModel _homeMenuViewModel;
+    private PopUpLoginViewModel _popUpLoginViewModel;
 
-    // Update is called once per frame
-    void Update()
+    public void SetViewModel(HomeMenuViewModel homeMenuViewModel,PopUpLoginViewModel popUpLoginViewModel)
     {
-        
+        _homeMenuViewModel = homeMenuViewModel;
+        _popUpLoginViewModel = popUpLoginViewModel;
+
+        _homeMenuViewModel.OnProfileButtonPressed.Subscribe((_) =>
+        {
+            _homeMenuViewModel.ProfileButtonEnabled.Value = false;
+        });
     }
 }

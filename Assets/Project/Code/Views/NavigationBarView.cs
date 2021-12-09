@@ -16,6 +16,16 @@ public class NavigationBarView : ViewBase
     {
         _navigationBarViewModel = navigationBarViewModel;
         
+        homeButton.onClick.AddListener(() =>
+        {
+            _navigationBarViewModel.OnHomeButtonPressed.Execute();
+        });
+        
+        rankingButton.onClick.AddListener(() =>
+        {
+            _navigationBarViewModel.OnRankingButtonPressed.Execute();
+        });
+        
         settingsButton.onClick.AddListener(() =>
         {
             _navigationBarViewModel.OnSettingsButtonPressed.Execute();

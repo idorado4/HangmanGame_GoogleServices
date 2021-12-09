@@ -6,9 +6,11 @@ using UnityEngine;
 public class SettingsMenuViewModel : ViewModelBase
 {
     public readonly ReactiveProperty<bool> Show;
+    public readonly ReactiveProperty<bool> ButtonEnabled;
     public SettingsMenuViewModel()
     {
-        Show = new ReactiveProperty<bool>(false);
+        Show = new ReactiveProperty<bool>(false).AddTo(_disposables);
+        ButtonEnabled = new ReactiveProperty<bool>(true).AddTo(_disposables);
     }
     
     
