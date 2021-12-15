@@ -33,7 +33,7 @@ public class InitInstaller : MonoBehaviour
         else
         {
             var userPasswordLoginUseCase = new UserPasswordLoginUseCase();
-            await userPasswordLoginUseCase.Do();
+            userPasswordLoginUseCase.Do("1", "1");
         }
 
         var loadSceneUseCase = new LoadSceneUseCase();

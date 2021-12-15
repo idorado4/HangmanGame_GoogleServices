@@ -29,10 +29,11 @@ public class FirebaseLoginService : ILoginService
         });
     }
 
-    public async Task UserPasswordLogin()
+    public async Task UserPasswordLogin(string email, string password)
     {
-        var email = PlayerPrefs.GetString("EMAIL");
-        var password = PlayerPrefs.GetString("PASSWORD");
+        //var email = PlayerPrefs.GetString("EMAIL");
+        //var password = PlayerPrefs.GetString("PASSWORD");
+        
         var auth = FirebaseAuth.DefaultInstance;
         
         await auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>

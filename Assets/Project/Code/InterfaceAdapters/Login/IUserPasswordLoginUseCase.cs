@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IUserPasswordLoginUseCase
 {
-    Task Do();
+    void Do(string email, string password);
 }

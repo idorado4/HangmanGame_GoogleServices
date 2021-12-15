@@ -7,7 +7,6 @@ using UnityEngine;
 public class UserData
 {
     [FirestoreProperty] public string Username { get; set; }
-    [FirestoreProperty] public string Password { get; set; }
     [FirestoreProperty] public bool Sound { get; set; }
     [FirestoreProperty] public bool Notifications { get; set; }
 

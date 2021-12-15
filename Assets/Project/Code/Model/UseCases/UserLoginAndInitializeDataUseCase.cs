@@ -30,6 +30,7 @@ public class UserLoginAndInitializeDataUseCase
         {
             var getUserDataUseCase = new GetUserDataUseCase();
             await getUserDataUseCase.Do();
+            Debug.Log("hecho el get user data de la dbb");
         }
     }
 }

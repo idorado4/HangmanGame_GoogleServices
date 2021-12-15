@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
@@ -11,7 +12,9 @@ public class PopUpLoginView : ViewBase
     
     [SerializeField] private Button popUpBackButton;
     [SerializeField] private Button popUpLoginButton;
-    [SerializeField] private RectTransform popUpLoginPanel;
+
+    [SerializeField] private TMP_InputField usernameInputField;
+    [SerializeField] private TMP_InputField passwordInputField;
 
     public void SetViewModel(PopUpLoginViewModel popUpLoginViewModel, NavigationBarViewModel navigationBarViewModel)
     {
@@ -33,7 +36,8 @@ public class PopUpLoginView : ViewBase
         
         popUpLoginButton.onClick.AddListener(() =>
         {
-            _popUpLoginViewModel.OnLoginButtonPressed.Execute();
+            var user_pass  = new List<string>{usernameInputField.text, passwordInputField.text};
+            _popUpLoginViewModel.OnLoginButtonPressed.Execute(user_pass);
         });
     }
 }

@@ -25,6 +25,14 @@ public class PopUpLoginController : ControllerBase
             _popUpLoginViewModel.ShowPanel.Value = false;
             _homeMenuViewModel.ProfileButtonEnabled.Value = true;
         });
+
+        _popUpLoginViewModel.OnLoginButtonPressed.Subscribe((user_pass) =>
+        {
+            var userPasswordLoginUseCase = new UserPasswordLoginUseCase();
+            userPasswordLoginUseCase.Do(user_pass[0], user_pass[1]);
+            Debug.Log(user_pass[0] +"  "+ user_pass[1]);
+            //use case de login password
+        });
     }
 
 }
