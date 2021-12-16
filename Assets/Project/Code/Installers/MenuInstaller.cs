@@ -18,6 +18,9 @@ public class MenuInstaller : MonoBehaviour
     
     private void Awake()
     {
+        var eventDispatcher = new EventDispatcher();
+
+        //ViewModels
         var navigationBarViewModel = new NavigationBarViewModel();
         var homeMenuViewModel = new HomeMenuViewModel();
         var settingsMenuViewModel = new SettingsMenuViewModel();
@@ -30,13 +33,19 @@ public class MenuInstaller : MonoBehaviour
         _rankingMenuView.SetViewModel(rankingMenuViewModel);
         _popUpProfileView.SetViewModel(popUpProfileViewModel, navigationBarViewModel);
         
+        //Controllers
         var homeMenuController = new HomeMenuController();
         var popUpProfileController = new PopUpProfileController();
-        
+        var settingsMenuController = new SettingsMenuController();
+
         popUpProfileController.SetViewModel(popUpProfileViewModel, homeMenuViewModel);
         homeMenuController.SetViewModel(homeMenuViewModel);
+        settingsMenuController.SetViewModel(settingsMenuViewModel);
         
-
+        
+        //Presenters
+        var homeMenuPresenter = new HomeMenuPresenter(eventDispatcher);
+        
         new NavigationBarController(navigationBarViewModel, homeMenuViewModel, settingsMenuViewModel, rankingMenuViewModel);
 
     }

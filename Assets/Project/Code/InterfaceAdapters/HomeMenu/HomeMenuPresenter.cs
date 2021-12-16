@@ -7,9 +7,7 @@ public class HomeMenuPresenter : PresenterBase
 
     //private readonly HomeMenuViewModel;
     private EventDispatcher _eventDispatcher;
-    
-    
-    
+
     public HomeMenuPresenter(EventDispatcher eventDispatcher)
     {
         _eventDispatcher = eventDispatcher;

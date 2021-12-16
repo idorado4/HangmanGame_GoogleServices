@@ -6,13 +6,12 @@ using UnityEngine;
 
 public class StoreUserCredentialsPlayerPrefsUseCase
 {
-    public void Do()
+    public void Do(string email, string password)
     {
-        if (!PlayerPrefs.HasKey("EMAIL"))
-        {
-            var loginService = ServiceLocator.Instance.GetService<ILoginService>();
-            PlayerPrefs.SetString("USERID", loginService.GetUserID());
-            Debug.Log("Creado playerpref con USERID:" + loginService.GetUserID());
-        }
+        var passwordEncryptor = new PasswordEncryptor();
+        var encryptedPassword = passwordEncryptor.XOREncryptDecrypt(password);
+        
+        PlayerPrefs.SetString("EMAIL",email);
+        PlayerPrefs.SetString("PASSWORD",encryptedPassword);
     }
 }

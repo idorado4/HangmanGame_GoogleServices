@@ -7,6 +7,6 @@ public class ChangeUsernameUseCaseUseCase : IChangeUsernameUseCase
 {
     public async Task Do(string newUsername)
     {
-        await ServiceLocator.Instance.GetService<IDatabaseService>().UpdateUserData(newUsername);
+        ServiceLocator.Instance.GetService<IDatabaseService>().UpdateUserData(newUsername);
     }
 }

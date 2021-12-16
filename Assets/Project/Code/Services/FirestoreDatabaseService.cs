@@ -59,14 +59,14 @@ public class FirestoreDatabaseService : IDatabaseService
             });
     }
 
-    public async Task UpdateUserData(string newUsername)
+    public void UpdateUserData(string newUsername)
     {
         var db = FirebaseFirestore.DefaultInstance;
         
         var docRef = db.Collection("users")
             .Document(ServiceLocator.Instance.GetService<ILoginService>().GetUserID());
 
-        await docRef.UpdateAsync("Username", newUsername);
+        docRef.UpdateAsync("Username", newUsername);
 
 
     }

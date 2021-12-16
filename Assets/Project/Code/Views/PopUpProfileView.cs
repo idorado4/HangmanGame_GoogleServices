@@ -15,6 +15,7 @@ public class PopUpProfileView : ViewBase
     [SerializeField] private Button changeUsernameButton;
 
     [SerializeField] private TMP_InputField usernameInputField;
+    [SerializeField] private TMP_Text username;
     
     public void SetViewModel(PopUpProfileViewModel popUpProfileViewModel, NavigationBarViewModel navigationBarViewModel)
     {
@@ -24,6 +25,12 @@ public class PopUpProfileView : ViewBase
         _popUpProfileViewModel.ShowPanel.Subscribe((showPanel) =>
         {
             gameObject.SetActive(showPanel);
+        });
+
+        _popUpProfileViewModel.Username.Subscribe((_username) =>
+        {
+            username.text = _username;
+            usernameInputField.text = "";
         });
         
         backButton.onClick.AddListener(() =>
@@ -36,6 +43,7 @@ public class PopUpProfileView : ViewBase
         {
             _popUpProfileViewModel.OnChangeUsernameButtonPressed.Execute(usernameInputField.text);
         });
+        
     }
 
 }

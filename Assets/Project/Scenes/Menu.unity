@@ -3379,6 +3379,7 @@ MonoBehaviour:
   backButton: {fileID: 1521496260}
   changeUsernameButton: {fileID: 1939599487}
   usernameInputField: {fileID: 235851857}
+  username: {fileID: 1915287729}
 --- !u!1001 &1196038200
 PrefabInstance:
   m_ObjectHideFlags: 0

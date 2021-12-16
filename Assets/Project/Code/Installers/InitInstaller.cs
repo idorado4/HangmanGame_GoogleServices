@@ -22,12 +22,13 @@ public class InitInstaller : MonoBehaviour
         //INCIO LAS NOTIFICACIONES QUE VAN SIN DEPENDER DE LOS DEMÁS SERVICIOS
         var initializePushNotificationsUseCase = new InitializePushNotificationsUseCase();
         initializePushNotificationsUseCase.Do();
+        
+        //serviceLocator.GetService<INotificationsService>().
 
         //CHECK DE USER Y LOGIN RESEPECTIVAMENTE
         var userLoginAndUserDataUseCase = new UserLoginAndUserDataUseCase();
         await userLoginAndUserDataUseCase.Do();
         
-
         var loadSceneUseCase = new LoadSceneUseCase();
         loadSceneUseCase.Do();
     }

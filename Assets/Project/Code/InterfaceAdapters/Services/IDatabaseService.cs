@@ -7,6 +7,6 @@ public interface IDatabaseService
 {
     Task InitializeUserData();
     Task CreateUserData();
-    Task UpdateUserData(string newUsername);
+    void UpdateUserData(string newUsername);
     Task GetUserData();
 }

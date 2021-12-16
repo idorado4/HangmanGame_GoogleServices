@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RankingMenuPresenter : MonoBehaviour
+public class RankingMenuPresenter : PresenterBase
 {
     // Start is called before the first frame update
     void Start()

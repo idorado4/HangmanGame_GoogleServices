@@ -27,14 +27,10 @@ public class PopUpProfileController : ControllerBase
 
         _popUpProfileViewModel.OnChangeUsernameButtonPressed.Subscribe((newUsername) =>
         {
-            /*var userPasswordLoginUseCase = new UserPasswordLoginUseCase();
-            userPasswordLoginUseCase.Do(user_pass[0], user_pass[1]);
-            Debug.Log(user_pass[0] +"  "+ user_pass[1]);*/
-            //use case de login password
-            
-            //use case de update username pasando el newUsername
             var changeUsernameUseCaseUseCase = new ChangeUsernameUseCaseUseCase();
             changeUsernameUseCaseUseCase.Do(newUsername);
+            _popUpProfileViewModel.Username.Value = newUsername;
+            
         });
     }
 }

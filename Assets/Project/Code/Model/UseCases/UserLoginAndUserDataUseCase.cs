@@ -23,7 +23,7 @@ public class UserLoginAndUserDataUseCase
         }
         else
         {
-            if (!PlayerPrefs.HasKey("PASSWORD"))
+            if (PlayerPrefs.HasKey("PASSWORD"))
             {
                 var userPasswordLoginUseCase = new UserPasswordLoginUseCase();
                 var passwordEncryptor = new PasswordEncryptor();
