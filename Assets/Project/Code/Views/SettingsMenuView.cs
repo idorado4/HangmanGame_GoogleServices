@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
@@ -12,7 +13,11 @@ public class SettingsMenuView : ViewBase
    [SerializeField] private float transitionTime;
    [SerializeField] private Button settingsButton;
 
-   
+   [SerializeField] private Button loginButton;
+
+   [SerializeField] private TMP_InputField emailInputField;
+   [SerializeField] private TMP_InputField passwordInputField;
+
    public void SetViewModel(SettingsMenuViewModel settingsMenuViewModel)
    {
       _settingsMenuViewModel = settingsMenuViewModel;
@@ -37,5 +42,12 @@ public class SettingsMenuView : ViewBase
          settingsButton.interactable = buttonEnabled;
 
       }).AddTo(_disposables);
+      
+        
+      loginButton.onClick.AddListener(() =>
+      {
+         var user_pass  = new List<string>{emailInputField.text, passwordInputField.text};
+         _settingsMenuViewModel.OnLoginButtonPressed.Execute(user_pass);
+      });
    }  
 }

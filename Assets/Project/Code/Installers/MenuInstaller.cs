@@ -13,8 +13,7 @@ public class MenuInstaller : MonoBehaviour
     [SerializeField] private RankingMenuView _rankingMenuView;
     [SerializeField] private SettingsMenuView _settingsMenuView;
     
-    [SerializeField] private PopUpLoginView _popUpLoginView;
-    
+    [SerializeField] private PopUpProfileView _popUpProfileView;
     
     
     private void Awake()
@@ -23,18 +22,18 @@ public class MenuInstaller : MonoBehaviour
         var homeMenuViewModel = new HomeMenuViewModel();
         var settingsMenuViewModel = new SettingsMenuViewModel();
         var rankingMenuViewModel = new RankingMenuViewModel();
-        var popUpLoginViewModel = new PopUpLoginViewModel();
+        var popUpProfileViewModel = new PopUpProfileViewModel();
 
         _navigationBarView.SetViewModel(navigationBarViewModel);
-        _homeMenuView.SetViewModel(homeMenuViewModel, popUpLoginViewModel, navigationBarViewModel);
+        _homeMenuView.SetViewModel(homeMenuViewModel, popUpProfileViewModel, navigationBarViewModel);
         _settingsMenuView.SetViewModel(settingsMenuViewModel);
         _rankingMenuView.SetViewModel(rankingMenuViewModel);
-        _popUpLoginView.SetViewModel(popUpLoginViewModel, navigationBarViewModel);
-
-        var homeMenuController = new HomeMenuController();
-        var popUpLoginController = new PopUpLoginController();
+        _popUpProfileView.SetViewModel(popUpProfileViewModel, navigationBarViewModel);
         
-        popUpLoginController.SetViewModel(popUpLoginViewModel, homeMenuViewModel);
+        var homeMenuController = new HomeMenuController();
+        var popUpProfileController = new PopUpProfileController();
+        
+        popUpProfileController.SetViewModel(popUpProfileViewModel, homeMenuViewModel);
         homeMenuController.SetViewModel(homeMenuViewModel);
         
 

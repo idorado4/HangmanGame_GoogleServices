@@ -9,5 +9,6 @@ public interface ILoginService
     Task UserPasswordLogin(string email, string password);
     Task NewUserPasswordLogin(string email, string password);
     bool CheckExistingUser();
+    bool IsAnonymous();
     string GetUserID();
 }

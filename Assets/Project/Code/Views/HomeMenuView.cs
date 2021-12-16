@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class HomeMenuView : ViewBase
 {
     private HomeMenuViewModel _homeMenuViewModel;
-    private PopUpLoginViewModel _popUpLoginViewModel;
+    private PopUpProfileViewModel _popUpProfileViewModel;
     private NavigationBarViewModel _navigationBarViewModel;
     
     [SerializeField] private float transitionTime;
@@ -16,11 +16,11 @@ public class HomeMenuView : ViewBase
     [SerializeField] private Button popUpProfileButton;
 
     public void SetViewModel(HomeMenuViewModel homeMenuViewModel,
-                            PopUpLoginViewModel popUpLoginViewModel,
+                            PopUpProfileViewModel popUpProfileViewModel,
                             NavigationBarViewModel navigationBarViewModel)
     {
         _homeMenuViewModel = homeMenuViewModel;
-        _popUpLoginViewModel = popUpLoginViewModel;
+        _popUpProfileViewModel = popUpProfileViewModel;
         _navigationBarViewModel = navigationBarViewModel;
 
         _homeMenuViewModel
@@ -59,7 +59,7 @@ public class HomeMenuView : ViewBase
             .AddListener(() =>
             {
                 _homeMenuViewModel.OnProfileButtonPressed.Execute();
-                _popUpLoginViewModel.OnProfileButtonPressed.Execute();
+                _popUpProfileViewModel.OnProfileButtonPressed.Execute();
                 _navigationBarViewModel.DisableButtons.Execute();
 
             });

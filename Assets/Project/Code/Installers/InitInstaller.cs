@@ -18,23 +18,15 @@ public class InitInstaller : MonoBehaviour
         serviceLocator.RegisterService<IDatabaseService>(new FirestoreDatabaseService());
         serviceLocator.RegisterService<INotificationsService>(new FirebaseCloudMessagingService());
         
+        
         //INCIO LAS NOTIFICACIONES QUE VAN SIN DEPENDER DE LOS DEMÁS SERVICIOS
         var initializePushNotificationsUseCase = new InitializePushNotificationsUseCase();
         initializePushNotificationsUseCase.Do();
 
-        //Checking User and logging accordingly.
-        //Creating/Getting the user data from Firestore
-        //Creating PlayerPrefs
-        if (!PlayerPrefs.HasKey("PASSWORD"))
-        {
-            var userLoginAndInitializeDataUseCase = new UserLoginAndInitializeDataUseCase();
-            await userLoginAndInitializeDataUseCase.Do();
-        }
-        else
-        {
-            var userPasswordLoginUseCase = new UserPasswordLoginUseCase();
-            userPasswordLoginUseCase.Do("1", "1");
-        }
+        //CHECK DE USER Y LOGIN RESEPECTIVAMENTE
+        var userLoginAndUserDataUseCase = new UserLoginAndUserDataUseCase();
+        await userLoginAndUserDataUseCase.Do();
+        
 
         var loadSceneUseCase = new LoadSceneUseCase();
         loadSceneUseCase.Do();

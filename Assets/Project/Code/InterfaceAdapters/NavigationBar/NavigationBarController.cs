@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class NavigationBarController : ControllerBase

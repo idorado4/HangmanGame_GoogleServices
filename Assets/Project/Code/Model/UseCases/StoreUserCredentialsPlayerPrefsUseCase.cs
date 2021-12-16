@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Firebase.Auth;
 using UnityEngine;
 
-public class CreateUserDataPlayerPrefsUseCase
+public class StoreUserCredentialsPlayerPrefsUseCase
 {
     public void Do()
     {
-        if (!PlayerPrefs.HasKey("USERID"))
+        if (!PlayerPrefs.HasKey("EMAIL"))
         {
             var loginService = ServiceLocator.Instance.GetService<ILoginService>();
             PlayerPrefs.SetString("USERID", loginService.GetUserID());

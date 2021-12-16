@@ -67,6 +67,11 @@ public class FirebaseLoginService : ILoginService
         return (user != null);
     }
 
+    public bool IsAnonymous()
+    {
+        return FirebaseAuth.DefaultInstance.CurrentUser.IsAnonymous;
+    }
+
     public string GetUserID()
     {
         return FirebaseAuth.DefaultInstance.CurrentUser.UserId;
