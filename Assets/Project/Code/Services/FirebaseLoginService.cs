@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Extensions;
@@ -28,7 +29,7 @@ public class FirebaseLoginService : ILoginService
                 newUser.DisplayName, newUser.UserId);
         });
     }
-
+ 
     public async Task UserPasswordLogin(string email, string password)
     {
         var auth = FirebaseAuth.DefaultInstance;
@@ -49,11 +50,11 @@ public class FirebaseLoginService : ILoginService
             var newUser = task.Result;
             Debug.LogFormat("User signed successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
-            
+
         });
         
     }
-   
+
     public async Task NewUserPasswordLogin(string email, string password)
     {
         var auth = FirebaseAuth.DefaultInstance;
@@ -75,6 +76,7 @@ public class FirebaseLoginService : ILoginService
             Debug.LogFormat("User signed successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
             
+
         });
     }
 
@@ -82,11 +84,6 @@ public class FirebaseLoginService : ILoginService
     {
         var user = FirebaseAuth.DefaultInstance.CurrentUser;
         return (user != null);
-    }
-
-    public bool IsAnonymous()
-    {
-        return FirebaseAuth.DefaultInstance.CurrentUser.IsAnonymous;
     }
 
     public string GetUserID()

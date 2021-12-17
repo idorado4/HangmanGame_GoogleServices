@@ -19,6 +19,9 @@ public class SettingsMenuView : ViewBase
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField passwordInputField;
 
+    [SerializeField] private Toggle notificationsCheckbox;
+    [SerializeField] private Toggle soundCheckbox;
+    
     public void SetViewModel(SettingsMenuViewModel settingsMenuViewModel)
     {
         _settingsMenuViewModel = settingsMenuViewModel;
@@ -50,21 +53,35 @@ public class SettingsMenuView : ViewBase
             emailInputField.text = "";
             passwordInputField.text = "";
         });
+
+        _settingsMenuViewModel.NotificationsCheckboxValue.Subscribe((value) =>
+        {
+            notificationsCheckbox.isOn = value;
+        });
+        
+        _settingsMenuViewModel.SoundCheckboxValue.Subscribe((value) =>
+        {
+            soundCheckbox.isOn = value;
+        });
         
         loginButton.onClick.AddListener(() =>
         {
-            var userPass = new List<string>();
-            
-            userPass.Add(emailInputField.text);
-            
-            var passwordEncryptor = new PasswordEncryptor();
-            var encryptedPass = passwordEncryptor.XOREncryptDecrypt(passwordInputField.text);
-            userPass.Add(encryptedPass);
-            
+            var userPass = new List<string> {emailInputField.text, passwordInputField.text};
             _settingsMenuViewModel.LoginButtonPressed.Execute(userPass);
+            _settingsMenuViewModel.NotificationsCheckboxPressed.Execute(notificationsCheckbox.isOn);
+            _settingsMenuViewModel.SoundCheckboxPressed.Execute(soundCheckbox.isOn);
+
         });
 
-       
+        notificationsCheckbox.onValueChanged.AddListener((_) =>
+        {
+            _settingsMenuViewModel.NotificationsCheckboxPressed.Execute(notificationsCheckbox.isOn);
+        });
+
+        soundCheckbox.onValueChanged.AddListener((_) =>
+        {
+            _settingsMenuViewModel.SoundCheckboxPressed.Execute(soundCheckbox.isOn);
+        });
 
 
     }  

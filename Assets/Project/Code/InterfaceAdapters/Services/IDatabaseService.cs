@@ -5,8 +5,9 @@ using UnityEngine;
 
 public interface IDatabaseService
 {
-    Task InitializeUserData();
     Task CreateUserData();
-    void UpdateUserData(string newUsername);
+    void UpdateUsername(string newUsername);
+    void UpdateNotifications(bool value);
+    void UpdateSound(bool value);
     Task GetUserData();
 }

@@ -27,7 +27,7 @@ public class PopUpProfileController : ControllerBase
 
         _popUpProfileViewModel.OnChangeUsernameButtonPressed.Subscribe((newUsername) =>
         {
-            var changeUsernameUseCaseUseCase = new ChangeUsernameUseCaseUseCase();
+            var changeUsernameUseCaseUseCase = new ChangeUsernameUseCase();
             changeUsernameUseCaseUseCase.Do(newUsername);
             _popUpProfileViewModel.Username.Value = newUsername;
             

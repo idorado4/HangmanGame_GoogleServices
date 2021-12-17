@@ -14,7 +14,7 @@ public class PopUpProfileViewModel : ViewModelBase
     public PopUpProfileViewModel()
     {
         ShowPanel = new ReactiveProperty<bool>(false).AddTo(_disposables);
-        Username = new ReactiveProperty<string>().AddTo(_disposables);
+        Username = new ReactiveProperty<string>(ServiceLocator.Instance.GetService<IUserDataAccessService>().GetLocalUser().Username).AddTo(_disposables);
         OnBackButtonPressed = new ReactiveCommand().AddTo(_disposables);
         OnProfileButtonPressed = new ReactiveCommand().AddTo(_disposables);
         OnChangeUsernameButtonPressed = new ReactiveCommand<string>().AddTo(_disposables);

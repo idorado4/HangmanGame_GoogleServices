@@ -3072,6 +3072,8 @@ MonoBehaviour:
   loginButton: {fileID: 254757866}
   emailInputField: {fileID: 368076050}
   passwordInputField: {fileID: 615440491}
+  notificationsCheckbox: {fileID: 1373919820}
+  soundCheckbox: {fileID: 2140775806}
 --- !u!1 &1070221932
 GameObject:
   m_ObjectHideFlags: 0

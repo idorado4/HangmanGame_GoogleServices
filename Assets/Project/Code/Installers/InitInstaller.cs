@@ -12,11 +12,14 @@ public class InitInstaller : MonoBehaviour
 {
     private async void Awake()
     {
+        var eventDispatcher = new EventDispatcher();
         //Service Locator
         var serviceLocator = ServiceLocator.Instance;
         serviceLocator.RegisterService<ILoginService>(new FirebaseLoginService());
         serviceLocator.RegisterService<IDatabaseService>(new FirestoreDatabaseService());
         serviceLocator.RegisterService<INotificationsService>(new FirebaseCloudMessagingService());
+        serviceLocator.RegisterService<IUserDataAccessService>(new UserRepository());
+        serviceLocator.RegisterService<IEventDispatcherService>(new EventDispatcher());
         
         
         //INCIO LAS NOTIFICACIONES QUE VAN SIN DEPENDER DE LOS DEMÁS SERVICIOS

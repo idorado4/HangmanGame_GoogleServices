@@ -6,23 +6,44 @@ using UnityEngine;
 public class SettingsMenuController : ControllerBase
 {
     private SettingsMenuViewModel _settingsMenuViewModel;
+    private EventDispatcher _eventDispatcher;
     public void SetViewModel (SettingsMenuViewModel settingsMenuViewModel)
     {
         _settingsMenuViewModel = settingsMenuViewModel;
 
         _settingsMenuViewModel
             .LoginButtonPressed
-            .Subscribe(OnLoginButtonPressed).AddTo(_disposables);
+            .Subscribe(OnLoginButtonPressed)
+            .AddTo(_disposables);
+
+        _settingsMenuViewModel
+            .NotificationsCheckboxPressed
+            .Subscribe(OnNotificationsCheckboxPressed)
+            .AddTo(_disposables);
+        
+        _settingsMenuViewModel
+            .SoundCheckboxPressed
+            .Subscribe(OnSoundCheckboxPressed)
+            .AddTo(_disposables);
     }
 
     private void OnLoginButtonPressed(List<string> userPass)
     {
-        var userPasswordLoginUseCase = new NewUserPasswordLoginUseCase();
-        userPasswordLoginUseCase.Do(userPass[0], userPass[1]);
+        var checkExistingUserUseCase = new CheckExistingUserUseCase();
+        checkExistingUserUseCase.Do(userPass);
+
         _settingsMenuViewModel.CleanInputFields.Execute();
-        var storeUserCredentialsPlayerPrefsUseCase = new StoreUserCredentialsPlayerPrefsUseCase();
-        storeUserCredentialsPlayerPrefsUseCase.Do(userPass[0], userPass[1]);
     }
-    
-    
+
+    private void OnNotificationsCheckboxPressed(bool value)
+    {
+        var updateNotificationsUseCase = new UpdateNotificationsUseCase();
+        updateNotificationsUseCase.Do(value);
+    }
+
+    private void OnSoundCheckboxPressed(bool value)
+    {
+        var updateSoundUseCase = new UpdateSoundUseCase();
+        updateSoundUseCase.Do(value);
+    }
 }

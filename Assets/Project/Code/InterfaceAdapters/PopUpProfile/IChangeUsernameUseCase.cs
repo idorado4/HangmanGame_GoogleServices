@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IChangeUsernameUseCase
 {
-    Task Do(string newUsername);
+    void Do(string newUsername);
 }

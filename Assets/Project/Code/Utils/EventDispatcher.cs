@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventDispatcher
+public class EventDispatcher : IEventDispatcherService
 {
  
     private readonly Dictionary<Type, dynamic> _events;
