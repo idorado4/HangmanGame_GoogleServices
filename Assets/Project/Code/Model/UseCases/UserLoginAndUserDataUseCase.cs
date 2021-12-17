@@ -10,7 +10,8 @@ public class UserLoginAndUserDataUseCase
     public async Task Do()
     {
         var loginService = ServiceLocator.Instance.GetService<ILoginService>();
-       if (!loginService.CheckExistingUser())
+        
+        if (!loginService.CheckExistingUser())
         {
             //LOGIN ANONIMO
             var anonymousLoginUseCase = new AnonymousLoginUseCase();

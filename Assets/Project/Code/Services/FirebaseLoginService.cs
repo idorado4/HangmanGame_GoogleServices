@@ -75,8 +75,6 @@ public class FirebaseLoginService : ILoginService
             var newUser = task.Result;
             Debug.LogFormat("User signed successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
-            
-
         });
     }
 

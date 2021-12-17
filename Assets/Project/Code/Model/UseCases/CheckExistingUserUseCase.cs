@@ -19,9 +19,6 @@ public class CheckExistingUserUseCase
           
             var userPasswordLoginUseCase = new UserPasswordLoginUseCase();
             userPasswordLoginUseCase.Do(email, password);
-                       
-            var eventDispatcher = ServiceLocator.Instance.GetService<IDatabaseService>();
-            eventDispatcher.GetUserData();
         }
         else
         {
@@ -32,5 +29,8 @@ public class CheckExistingUserUseCase
             var storeUserCredentialsPlayerPrefsUseCase = new StoreUserCredentialsPlayerPrefsUseCase();
             storeUserCredentialsPlayerPrefsUseCase.Do(email, password);
         }
+        
+        var eventDispatcher = ServiceLocator.Instance.GetService<IDatabaseService>();
+        await eventDispatcher.GetUserData();
     }
 }
