@@ -28,13 +28,14 @@ public class MenuInstaller : MonoBehaviour
         _navigationBarView.SetViewModel(navigationBarViewModel);
         _homeMenuView.SetViewModel(homeMenuViewModel, popUpProfileViewModel, navigationBarViewModel);
         _settingsMenuView.SetViewModel(settingsMenuViewModel);
-        _rankingMenuView.SetViewModel(rankingMenuViewModel);
+        _rankingMenuView.SetViewModel(rankingMenuViewModel, navigationBarViewModel);
         _popUpProfileView.SetViewModel(popUpProfileViewModel, navigationBarViewModel);
         
         //Controllers
         var homeMenuController = new HomeMenuController();
         var popUpProfileController = new PopUpProfileController();
         var settingsMenuController = new SettingsMenuController();
+        var rankingMenuController = new RankingMenuController();
 
         popUpProfileController.SetViewModel(popUpProfileViewModel, homeMenuViewModel);
         homeMenuController.SetViewModel(homeMenuViewModel);
@@ -44,7 +45,9 @@ public class MenuInstaller : MonoBehaviour
         //Presenters
         new SettingsMenuPresenter(settingsMenuViewModel);
         new PopUpProfilePresenter(popUpProfileViewModel);
-
+       
+        var getRankingDataUseCase = new GetRankingDataUseCase();
+        getRankingDataUseCase.Do();
 
     }
 }

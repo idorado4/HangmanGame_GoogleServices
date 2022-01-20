@@ -1,18 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RankingData : MonoBehaviour
+public class RankingData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int Position;
+    public string Username;
+    public int Score;
+    public string Time;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //public RankingData() { }
 }

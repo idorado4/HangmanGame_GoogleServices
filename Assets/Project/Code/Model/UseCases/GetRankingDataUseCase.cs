@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class GetRankingDataUseCase : IGetRankingDataUseCase
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Do()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ServiceLocator.Instance.GetService<IRankingDataService>().GetRankingData();
     }
 }

@@ -26,6 +26,8 @@ public class InitInstaller : MonoBehaviour
         serviceLocator.RegisterService<IUserDataAccessService>(new UserRepository());
         serviceLocator.RegisterService<IAdsService>(new GoogleAdmobService());
         serviceLocator.RegisterService<IAnalyticsService>(new FirestoreAnalyticsService());
+        serviceLocator.RegisterService<ILocalRankingService>(new LocalRankingRepository());
+        serviceLocator.RegisterService<IRankingDataService>(new FirestoreRealtimeDatabaseService());
         serviceLocator.RegisterService<IEventDispatcherService>(new EventDispatcher());
 
 
