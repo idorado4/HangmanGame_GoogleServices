@@ -5,5 +5,6 @@ using UnityEngine;
 
 public interface INotificationsService
 {
-    void ActivateNotifications();
+    void EnableNotifications();
+    void DisableNotifications();
 }

@@ -6,7 +6,12 @@ using UnityEngine;
 public class InitializePushNotificationsUseCase
 {
     public void Do()
-    { 
-        ServiceLocator.Instance.GetService<INotificationsService>().ActivateNotifications();
+    {
+        var user = ServiceLocator.Instance.GetService<IUserDataAccessService>().GetLocalUser();
+        if (user.Notifications){
+            ServiceLocator.Instance.GetService<INotificationsService>().EnableNotifications();
+            return;
+        }
+        ServiceLocator.Instance.GetService<INotificationsService>().DisableNotifications();
     }
 }
