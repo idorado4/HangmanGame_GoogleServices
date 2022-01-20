@@ -23,8 +23,8 @@ public class FirestoreAnalyticsService : IAnalyticsService
         // Log an event with an int parameter.
         Firebase.Analytics.FirebaseAnalytics
             .LogEvent(
-                "level_start",
-                "level",
+                "new_chance",
+                "view_ad",
                 castedValue
             );
     }
@@ -35,6 +35,9 @@ public class FirestoreAnalyticsService : IAnalyticsService
         Firebase
             .Analytics
             .FirebaseAnalytics
-            .LogEvent("Show Ad");
+            .LogEvent(
+                "show_ad",
+                "show ad",
+                "showing ad");
     }
 }
