@@ -30,7 +30,6 @@ public class FirestoreRealtimeDatabaseService : IRankingDataService
                     var orderedRanking = task.Result;
 
                     List<RankingData> ranking = new List<RankingData>();
-                    int maxPlayers = 10;
 
                     foreach (var player in orderedRanking.Children)
                     {
@@ -38,21 +37,21 @@ public class FirestoreRealtimeDatabaseService : IRankingDataService
 
                         var newRankingData = new RankingData()
                         {
-                            Position = maxPlayers,
+                            Position = 0,
                             Username = player.Key,
                             Score = Int32.Parse(dictionary["SCORE"].ToString()),
                             Time = dictionary["TIME"].ToString()
                         };
 
                         ranking.Add(newRankingData);
-
-                        maxPlayers--;
-                        if (maxPlayers == 0) break;
                     }
 
+                    int maxPlayers = 10;
+                    int position = 1;
                     List<RankingData> rankingFlip = new List<RankingData>();
-                    for (int i = ranking.Count - 1; i >= 0; i--)
+                    for (int i = ranking.Count - 1; maxPlayers > 0; i--, maxPlayers--, position++)
                     {
+                        ranking[i].Position = position;
                         rankingFlip.Add(ranking[i]);
                     }
 
@@ -64,7 +63,23 @@ public class FirestoreRealtimeDatabaseService : IRankingDataService
     public async void UpdateRankingData(int score, string time)
     {
         var db = FirebaseDatabase.DefaultInstance;
-        Debug.Log(ServiceLocator.Instance.GetService<IUserDataAccessService>().GetLocalUser());
+
+        var username = ServiceLocator.Instance.GetService<IUserDataAccessService>().GetLocalUser().Username;
+        Debug.Log(username);
+
+        string currentPoints = "";
+
+        await db
+            .GetReference($"ranking")
+            .Child($"{username}")
+            .Child("SCORE")
+            .GetValueAsync()
+            .ContinueWithOnMainThread(task => { currentPoints = task.Result.Value.ToString(); });
+
+        if (Int32.Parse(currentPoints) >= score) return;
+        
+        Debug.Log("el score es superior, actualizo ranking");
+        
         IDictionary<string, object> update = new Dictionary<string, object>()
         {
             {$"{ServiceLocator.Instance.GetService<IUserDataAccessService>().GetLocalUser().Username}/SCORE", score},
@@ -78,7 +93,7 @@ public class FirestoreRealtimeDatabaseService : IRankingDataService
                 if (task.IsCompleted)
                 {
                     Debug.Log("Ranking Actualizado");
-                } 
+                }
             });
         await GetRankingData();
     }

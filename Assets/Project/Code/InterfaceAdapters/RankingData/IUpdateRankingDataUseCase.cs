@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IUpdateRankingDataUseCase
 {
- 
+    void Do(int score, string time);
 }

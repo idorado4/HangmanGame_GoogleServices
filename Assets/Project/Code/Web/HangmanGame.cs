@@ -133,13 +133,13 @@ public class HangmanGame : MonoBehaviour
         _popUpWin.SetActive(false);
         _popUpLoseAd.SetActive(false);
         
-        playing = false;
-        adRewarded = false;
-        continuedPlaying = false;
-
         time = 0.0f;
         wordsStrike = 0;
         acumPoints = 0;
+        canShowAd = true;
+        adRewarded = false;
+        playing = false;
+        continuedPlaying = false;
         
         for (int i = 0; i < _guessLetterButton.Count; i++)
         {
