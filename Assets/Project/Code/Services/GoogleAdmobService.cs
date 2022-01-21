@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GoogleAdmobService : IAdsService
 {
+    private bool rewardObtained;
+    
     private RewardedAd _rewardedAd;
     public void CreateRewardedAd()
     {
@@ -15,14 +17,13 @@ public class GoogleAdmobService : IAdsService
         Handlers();
     }
 
-    
-
     public void LoadAd()
     {
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
         _rewardedAd.LoadAd(request);
+        rewardObtained = false;
     }
 
     public void ShowAd()
@@ -30,6 +31,11 @@ public class GoogleAdmobService : IAdsService
         if (_rewardedAd.IsLoaded()) {
             _rewardedAd.Show();
         }
+    }
+
+    public bool RewardObtained()
+    {
+        return rewardObtained;
     }
     
     private void Handlers()
@@ -81,7 +87,7 @@ public class GoogleAdmobService : IAdsService
         //CREA Y CARGA UN ANUNCIO NUEVO
         CreateRewardedAd();
         LoadAd();
-        
+        rewardObtained = false;
     }
     
 
@@ -89,6 +95,7 @@ public class GoogleAdmobService : IAdsService
     {
         string type = args.Type;
         double amount = args.Amount;
+        rewardObtained = true;
         MonoBehaviour.print(
             "HandleRewardedAdRewarded event received for "
             + amount.ToString() + " " + type);

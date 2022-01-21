@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UniRx;
 public class NavigationBarView : ViewBase
 {
     private NavigationBarViewModel _navigationBarViewModel;
@@ -30,5 +30,13 @@ public class NavigationBarView : ViewBase
         {
             _navigationBarViewModel.OnSettingsButtonPressed.Execute();
         });
+        
+        _navigationBarViewModel
+            .Hide
+            .Subscribe((hide) =>
+            {
+                gameObject.SetActive(!hide);
+            })
+            .AddTo(_disposables);
     }
 }

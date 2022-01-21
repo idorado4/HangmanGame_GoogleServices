@@ -8,4 +8,5 @@ public interface IAdsService
     void CreateRewardedAd();
     void LoadAd();
     void ShowAd();
+    bool RewardObtained();
 }

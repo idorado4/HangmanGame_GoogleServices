@@ -10,18 +10,23 @@ public class HomeMenuView : ViewBase
     private HomeMenuViewModel _homeMenuViewModel;
     private PopUpProfileViewModel _popUpProfileViewModel;
     private NavigationBarViewModel _navigationBarViewModel;
+    private GameViewModel _gameViewModel;
     
     [SerializeField] private float transitionTime;
     [SerializeField] private Button homeButton;
     [SerializeField] private Button popUpProfileButton;
-
+    [SerializeField] private Button playButton;
+    
+    
     public void SetViewModel(HomeMenuViewModel homeMenuViewModel,
                             PopUpProfileViewModel popUpProfileViewModel,
-                            NavigationBarViewModel navigationBarViewModel)
+                            NavigationBarViewModel navigationBarViewModel,
+                            GameViewModel gameViewModel)
     {
         _homeMenuViewModel = homeMenuViewModel;
         _popUpProfileViewModel = popUpProfileViewModel;
         _navigationBarViewModel = navigationBarViewModel;
+        _gameViewModel = gameViewModel;
 
         _homeMenuViewModel
             .Show
@@ -35,6 +40,14 @@ public class HomeMenuView : ViewBase
                 }
 
                 gameObject.transform.DOLocalMoveX(0, transitionTime);
+            })
+            .AddTo(_disposables);
+        
+        _homeMenuViewModel
+            .Hide
+            .Subscribe((hide) =>
+            {
+                gameObject.SetActive(!hide);
             })
             .AddTo(_disposables);
 
@@ -63,7 +76,14 @@ public class HomeMenuView : ViewBase
                 _navigationBarViewModel.DisableButtons.Execute();
 
             });
-      
+
+        playButton
+            .onClick
+            .AddListener(() =>
+            {
+                _homeMenuViewModel.OnPlayButtonPressed.Execute();
+
+            });
 
     }
     
