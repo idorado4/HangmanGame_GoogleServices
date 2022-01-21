@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
-public class RankingMenuController : MonoBehaviour
+public class RankingMenuController : ControllerBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private RankingMenuViewModel _rankingMenuViewModel;
+   
 
-    // Update is called once per frame
-    void Update()
+    public void SetViewModel(RankingMenuViewModel rankingMenuViewModel)
     {
-        
+        _rankingMenuViewModel = rankingMenuViewModel;
+
+        _rankingMenuViewModel.OnRankingButtonPressed.Subscribe((_) =>
+        {
+            var getRankingDataUseCase = new GetRankingDataUseCase();
+        });
     }
 }

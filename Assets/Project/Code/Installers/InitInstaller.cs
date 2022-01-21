@@ -10,7 +10,12 @@ using UnityEngine.UI;
 
 public class InitInstaller : MonoBehaviour
 {
-    private async void Awake()
+    private UserLoginAndUserDataUseCase userLoginAndUserDataUseCase;
+    private InitializePushNotificationsUseCase initializePushNotificationsUseCase;
+    private LoadSceneUseCase loadSceneUseCase;
+    private InitializeAdsUseCase initializeAdsUseCase;
+
+    private void Awake()
     {
         var eventDispatcher = new EventDispatcher();
         //Service Locator
@@ -19,18 +24,34 @@ public class InitInstaller : MonoBehaviour
         serviceLocator.RegisterService<IDatabaseService>(new FirestoreDatabaseService());
         serviceLocator.RegisterService<INotificationsService>(new FirebaseCloudMessagingService());
         serviceLocator.RegisterService<IUserDataAccessService>(new UserRepository());
+        serviceLocator.RegisterService<IAdsService>(new GoogleAdmobService());
+        serviceLocator.RegisterService<IAnalyticsService>(new FirestoreAnalyticsService());
+        serviceLocator.RegisterService<ILocalRankingService>(new LocalRankingRepository());
+        serviceLocator.RegisterService<IRankingDataService>(new FirestoreRealtimeDatabaseService());
         serviceLocator.RegisterService<IEventDispatcherService>(new EventDispatcher());
-        
 
+
+        userLoginAndUserDataUseCase = new UserLoginAndUserDataUseCase();
+
+        initializePushNotificationsUseCase = new InitializePushNotificationsUseCase();
+
+        initializeAdsUseCase = new InitializeAdsUseCase();
+
+        loadSceneUseCase = new LoadSceneUseCase();
+    }
+
+    private async void Start()
+    {
         //CHECK DE USER Y LOGIN RESEPECTIVAMENTE
-        var userLoginAndUserDataUseCase = new UserLoginAndUserDataUseCase();
         await userLoginAndUserDataUseCase.Do();
         
-        //INCIO LAS NOTIFICACIONES QUE DEPENDEN DE LOS DATOS DEL PLAYER
-        var initializePushNotificationsUseCase = new InitializePushNotificationsUseCase();
+        //INICIALIZO LAS NOTIFICACIONES QUE DEPENDEN DE LOS DATOS DEL PLAYER
         initializePushNotificationsUseCase.Do();
         
-        var loadSceneUseCase = new LoadSceneUseCase();
+        //INICIALIZO LOS ANUNCIOS
+        initializeAdsUseCase.Do();
+
+        //CAMBIO DE ESCENA
         loadSceneUseCase.Do();
     }
 }

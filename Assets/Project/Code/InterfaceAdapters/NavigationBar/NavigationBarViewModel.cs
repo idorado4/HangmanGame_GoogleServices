@@ -10,6 +10,7 @@ public class NavigationBarViewModel : ViewModelBase
     public readonly ReactiveCommand OnSettingsButtonPressed;
     public readonly ReactiveCommand DisableButtons; 
     public readonly ReactiveCommand EnableButtons; 
+    public readonly ReactiveProperty<bool> Hide;
 
     public NavigationBarViewModel()
     {
@@ -18,5 +19,7 @@ public class NavigationBarViewModel : ViewModelBase
         OnSettingsButtonPressed = new ReactiveCommand().AddTo(_disposables);
         DisableButtons = new ReactiveCommand().AddTo(_disposables);
         EnableButtons = new ReactiveCommand().AddTo(_disposables);
+        Hide = new ReactiveProperty<bool>(false).AddTo(_disposables);
+
     }
 }

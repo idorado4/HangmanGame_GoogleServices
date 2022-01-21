@@ -6,10 +6,18 @@ using UnityEngine;
 
 public class FirebaseCloudMessagingService : INotificationsService
 {
-    public void ActivateNotifications()
+    public void EnableNotifications()
     {
         FirebaseMessaging.TokenReceived += OnTokenReceived;
         FirebaseMessaging.MessageReceived += OnMessageReceived;
+        Debug.Log("Notificaciones activadas");
+    }
+
+    public void DisableNotifications()
+    {
+        FirebaseMessaging.TokenReceived -= OnTokenReceived;
+        FirebaseMessaging.MessageReceived -= OnMessageReceived;
+        Debug.Log("Notificaciones desactivadas");
     }
 
     private void OnTokenReceived(object sender, TokenReceivedEventArgs token)

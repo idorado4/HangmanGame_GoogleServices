@@ -74,7 +74,7 @@ public class FirestoreDatabaseService : IDatabaseService
         var db = FirebaseFirestore.DefaultInstance;
         var eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcherService>();
         var userDataRepo = ServiceLocator.Instance.GetService<IUserDataAccessService>();
-        
+        Debug.Log(ServiceLocator.Instance.GetService<ILoginService>().GetUserID());
         var docRef = db.Collection("users")
             .Document(ServiceLocator.Instance.GetService<ILoginService>().GetUserID());
 

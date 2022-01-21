@@ -39,6 +39,8 @@ public class SettingsMenuController : ControllerBase
     {
         var updateNotificationsUseCase = new UpdateNotificationsUseCase();
         updateNotificationsUseCase.Do(value);
+        var disablePushNotificationsUseCase = new DisablePushNotificationsUseCase();
+        disablePushNotificationsUseCase.Do();
     }
 
     private void OnSoundCheckboxPressed(bool value)
