@@ -123,6 +123,9 @@ public class HangmanGame : MonoBehaviour
 
     private void ExitGame()
     {
+        var updateRankingDataUseCase = new UpdateRankingDataUseCase();
+        updateRankingDataUseCase.Do(acumPoints, time.ToString());
+        
         gameObject.SetActive(false);
         _homeMenuViewModel.Hide.Value = false;
         _navigationBarViewModel.Hide.Value = false;
@@ -146,6 +149,7 @@ public class HangmanGame : MonoBehaviour
             _guessLetterButton[i].interactable = true;
             _guessLetterButton[i].image.color = Color.white;
         }
+
         
     }
 
